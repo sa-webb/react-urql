@@ -1,20 +1,18 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { createClient, Provider } from "urql"
 
-import Header from './components/Header'
-import LinkList from './components/LinkList'
-import CreateLink from './components/CreateLink'
+import { Todos } from "./components/Todos"
 
-const App = () => (
-  <div className="center w85">
-    <Header />
-    <div className="ph3 pv1 background-gray">
-      <Switch>
-        <Route exact path="/" component={LinkList} />
-        <Route exact path="/create" component={CreateLink} />
-      </Switch>
-    </div>
-  </div>
-)
+const client = createClient({
+  url: "https://0ufyz.sse.codesandbox.io"
+})
+
+const App = () => {
+  return (
+    <Provider value={client}>
+      <Todos />
+    </Provider>
+  );
+};
 
 export default App
